@@ -1,0 +1,33 @@
+name: lint-issues
+
+on:
+  pull_request:
+    branches: [ develop, release ]
+
+jobs:
+  pint:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ ubuntu-latest ]
+        php: [ 8.2 ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Set github token
+        run: composer config --global --auth github-oauth.github.com ${{ secrets.COMPOSER_TOKEN }}
+
+      - name: Install Standards
+        run: composer require treblle/standards
+
+      - name: Run Standards Pint
+        run: ./vendor/bin/standards lint
