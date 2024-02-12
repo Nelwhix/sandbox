@@ -27,7 +27,7 @@ jobs:
         run: composer config --global --auth github-oauth.github.com ${{ secrets.COMPOSER_TOKEN }}
 
       - name: Install Standards
-        run: composer require treblle/standards
+        run: composer require treblle/standards:dev-main
 
       - name: Run Standards Pint
         run: ./vendor/bin/standards lint
