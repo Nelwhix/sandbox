@@ -1,8 +1,8 @@
 name: lint-issues
 
 on:
-  pull_request:
-    branches: [ develop, release ]
+  push:
+    branches: [ main ]
 
 jobs:
   pint:

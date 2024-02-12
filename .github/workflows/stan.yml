@@ -1,11 +1,11 @@
-name: lint-issues
+name: static-analysis
 
 on:
-  pull_request:
-    branches: [ develop, release ]
+  push:
+    branches: [ main ]
 
 jobs:
-  pint:
+  stan:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
